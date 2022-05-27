@@ -1,8 +1,9 @@
+import { NewSurveyButton } from "../../components/newSurveyButton";
+
 export default function Home() {
-    return (
-      <div>
-        dashboard
-      </div>
-    )
-  }
-  
+  return (
+    <div>
+      <NewSurveyButton />
+    </div>
+  );
+}
