@@ -4,7 +4,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
 
-export const AddSurveyBtn = () => {
+export const AddSurveyBtn = ({ addQuestion }) => {
   return (
     <PopupState variant="popover" popupId="demo-popup-menu">
       {(popupState) => (
@@ -15,14 +15,32 @@ export const AddSurveyBtn = () => {
           <Menu {...bindMenu(popupState)}>
             <MenuItem
               onClick={() => {
-                console.log("he"), popupState.close();
+                addQuestion(), popupState.close();
               }}
             >
               Single
             </MenuItem>
-            <MenuItem onClick={popupState.close}>Multi</MenuItem>
-            <MenuItem onClick={popupState.close}>Open</MenuItem>
-            <MenuItem onClick={popupState.close}>Rating</MenuItem>
+            <MenuItem
+              onClick={() => {
+                addQuestion(), popupState.close();
+              }}
+            >
+              Multi
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                addQuestion(), popupState.close();
+              }}
+            >
+              Open
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                addQuestion(), popupState.close();
+              }}
+            >
+              Rating
+            </MenuItem>
           </Menu>
         </React.Fragment>
       )}
