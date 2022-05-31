@@ -3,6 +3,11 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
 export const SurveyNameInput = () => {
+
+const handleChange = (e) =>{
+console.log(e.target.value)
+}
+
   return (
     <Box
       sx={{
@@ -10,7 +15,7 @@ export const SurveyNameInput = () => {
         maxWidth: '100%',
       }}
     >
-      <TextField fullWidth label="Survey Name" id="surveyName" />
+      <TextField fullWidth label="Survey Name" id="surveyName" onChange={handleChange} />
     </Box>
   );
 }

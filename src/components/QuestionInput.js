@@ -1,10 +1,12 @@
 import * as React from "react";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
 
 export const QuestionInput = () => {
-
+  
+const handleChange = (e) => {
+  console.log(e.target.value)
+}
 
   return (
     <Stack
@@ -24,8 +26,8 @@ export const QuestionInput = () => {
         defaultValue=""
         placeholder="Type your question here"
         size="small"
+        onChange={handleChange}
       />
     </Stack>
   );
 };
-

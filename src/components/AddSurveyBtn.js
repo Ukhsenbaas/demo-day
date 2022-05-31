@@ -15,28 +15,32 @@ export const AddSurveyBtn = ({ addQuestion }) => {
           <Menu {...bindMenu(popupState)}>
             <MenuItem
               onClick={() => {
-                addQuestion(), popupState.close();
+                addQuestion("single-selection");
+                popupState.close();
               }}
             >
               Single
             </MenuItem>
             <MenuItem
               onClick={() => {
-                addQuestion(), popupState.close();
+                addQuestion("multi-selection");
+                popupState.close();
               }}
             >
               Multi
             </MenuItem>
             <MenuItem
               onClick={() => {
-                addQuestion(), popupState.close();
+                addQuestion("open");
+                popupState.close();
               }}
             >
               Open
             </MenuItem>
             <MenuItem
               onClick={() => {
-                addQuestion(), popupState.close();
+                addQuestion("rating");
+                popupState.close();
               }}
             >
               Rating
