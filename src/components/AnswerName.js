@@ -1,12 +1,34 @@
-import * as React from "react";
+import _ from "lodash";
+import { useCallback } from "react";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 
-export const AnswerName = () => {
-  const handleChange = (e) =>{
-    console.log(e.target.value)
-    }
+export const AnswerName = ({ setformData, index }) => {
+  function handleChange(event) {
+    debounceFn(event.target.value, Number(event.target.id));
+  }
+  const debounceFn = useCallback(_.debounce(handleDebounceFn, 1000), []);
+
+  function handleDebounceFn(value, id) {
+    setformData((prev) => {
+      let array = [...prev[length].answers];
+
+      // console.log(prev[length].answers.length, id);
+      if (prev[length].answers.length <= id) {
+        array.push(value);
+      } else {
+        array[id] = value;
+      }
+      return {
+        ...prev,
+        [Object.keys(prev).length - 1]: {
+          ...prev[length],
+          answers: array,
+        },
+      };
+    });
+  }
   return (
     <Stack
       component="form"
@@ -20,21 +42,15 @@ export const AnswerName = () => {
       autoComplete="off"
     >
       <Box id="answerContainer">
-      <TextField
-        hiddenLabel
-        id="filled-hidden-label-normal"
-        placeholder="Type answer"
-        defaultValue=""
-        size="small"
-        onChange={handleChange}
-      />
-    </Box>
+        <TextField
+          hiddenLabel
+          id={index.toString()}
+          placeholder="Type answer"
+          defaultValue=""
+          size="small"
+          onChange={handleChange}
+        />
+      </Box>
     </Stack>
-    
   );
 };
-
-
-
-
-

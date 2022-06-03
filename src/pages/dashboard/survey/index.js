@@ -4,10 +4,12 @@ import { AnswerName } from "../../../components/AnswerName";
 import { QuestionInput } from "../../../components/QuestionInput";
 import { SurveyNameInput } from "../../../components/SurveyNameInput";
 import { DoneSurvey } from "../../../components/DoneSurvey";
+import { useCollection } from "../../../firebase";
 
 export default function Survey() {
   const [formData, setformData] = useState({});
 
+  const { firebasePushSurvey } = useCollection("company/starpup1/surveys");
   const addQuestion = (type) => {
     setformData((prev) => ({
       ...prev,
@@ -18,6 +20,7 @@ export default function Survey() {
       },
     }));
   };
+  console.log(formData);
 
   const addAnswer = (index) => {
     setformData((prev) => ({
@@ -28,7 +31,6 @@ export default function Survey() {
       },
     }));
   };
-  console.log(formData);
   return (
     <>
       <SurveyNameInput />
@@ -37,14 +39,18 @@ export default function Survey() {
 
         return (
           <Fragment key={index}>
-            <QuestionInput />
-            <AnswerName />
+            <QuestionInput
+              addQuestion={addQuestion}
+              setformData={setformData}
+              
+            />
+             {/* <AnswerName setformData={setformData} index={index}/> */}
             {answers?.map((cur, index) => (
               <Fragment key={index}>
-                <AnswerName />
+                <AnswerName setformData={setformData} index={index}/>
               </Fragment>
             ))}
-            <button onClick={() => addAnswer(cur)}>add</button>
+            <button onClick={() => addAnswer(index)}>add</button>
           </Fragment>
         );
       })}
@@ -52,7 +58,10 @@ export default function Survey() {
         <AddSurveyBtn addQuestion={addQuestion} />
       </div>
       <div>
-        <DoneSurvey />
+        <DoneSurvey
+          firebasePushSurvey={firebasePushSurvey}
+          setformData={setformData}
+        />
       </div>
     </>
   );

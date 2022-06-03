@@ -1,13 +1,22 @@
-import * as React from "react";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
+import _ from "lodash";
+import { useCallback } from "react";
+export const QuestionInput = ({ setformData }) => {
+  function handleChange(event) {
+    debounceFn(event.target.value);
+  }
+  const debounceFn = useCallback(_.debounce(handleDebounceFn, 1000), []);
 
-export const QuestionInput = () => {
-  
-const handleChange = (e) => {
-  console.log(e.target.value)
-}
-
+  function handleDebounceFn(value) {
+    setformData((prev) => ({
+      ...prev,
+      [Object.keys(prev).length - 1]: {
+        ...prev[length],
+        question: value,
+      },
+    }));
+  }
   return (
     <Stack
       component="form"

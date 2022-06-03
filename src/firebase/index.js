@@ -11,13 +11,13 @@ import {
   orderBy,
 } from "firebase/firestore";
 const firebaseConfig = {
-    apiKey: "AIzaSyD3LbGnSxxbeWDPFtHvlhqAG8YNMO_0f8U",
-    authDomain: "suvey-2ce18.firebaseapp.com",
-    projectId: "suvey-2ce18",
-    storageBucket: "suvey-2ce18.appspot.com",
-    messagingSenderId: "421245165897",
-    appId: "1:421245165897:web:88f3494e75bcbc02227a98"
-  };
+  apiKey: "AIzaSyD3LbGnSxxbeWDPFtHvlhqAG8YNMO_0f8U",
+  authDomain: "suvey-2ce18.firebaseapp.com",
+  projectId: "suvey-2ce18",
+  storageBucket: "suvey-2ce18.appspot.com",
+  messagingSenderId: "421245165897",
+  appId: "1:421245165897:web:88f3494e75bcbc02227a98",
+};
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
@@ -27,17 +27,17 @@ export const auth = getAuth(app);
 const db = getFirestore(app);
 
 export const useCollection = (path) => {
-
   // add function
-  const addSurvey = (data) => {
-    return addDoc(collection(db, 'company/starpup1/surveys/survey1'), {
+  const firebasePushSurvey = (data) => {
+    console.log(data);
+    console.log(path);
+    return addDoc(collection(db, `${path}`), {
       ...data,
       createdAt: serverTimestamp(),
     });
   };
 
   return {
-    data,
-    addSurvey,
+    firebasePushSurvey,
   };
 };
