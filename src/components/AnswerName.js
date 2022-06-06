@@ -4,30 +4,24 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 
-export const AnswerName = ({ setformData, index }) => {
+export const AnswerName = ({ setformData, index, formData, questionIndex }) => {
   function handleChange(event) {
-    debounceFn(event.target.value, Number(event.target.id));
+    debounceFn(event.target.value, Number(event.target.id), formData);
   }
   const debounceFn = useCallback(_.debounce(handleDebounceFn, 1000), []);
 
-  function handleDebounceFn(value, id) {
-    setformData((prev) => {
-      let array = [...prev[length].answers];
+  function handleDebounceFn(value, index, formData) {
+    console.log(index, questionIndex, formData[questionIndex].answers[index]);
 
-      // console.log(prev[length].answers.length, id);
-      if (prev[length].answers.length <= id) {
-        array.push(value);
-      } else {
-        array[id] = value;
-      }
-      return {
-        ...prev,
-        [Object.keys(prev).length - 1]: {
-          ...prev[length],
-          answers: array,
-        },
-      };
-    });
+    formData[questionIndex].answers.splice(index, 1, value);
+    console.log(formData[questionIndex].answers);
+    setformData((prev) => ({
+      ...prev,
+      [questionIndex]: {
+        ...formData[questionIndex],
+        answers: [...formData[questionIndex].answers],
+      },
+    }));
   }
   return (
     <Stack

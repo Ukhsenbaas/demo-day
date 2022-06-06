@@ -17,6 +17,7 @@ export default function Survey() {
         question: "",
         type: type,
         answers: [],
+        results: [],
       },
     }));
   };
@@ -34,23 +35,34 @@ export default function Survey() {
   return (
     <>
       <SurveyNameInput />
-      {Object.keys(formData).map((cur, index) => {
+      {Object.keys(formData).map((cur, questionIndex) => {
         const answers = formData[cur].answers;
+        const type = formData[cur].type;
 
         return (
-          <Fragment key={index}>
+          <Fragment key={questionIndex}>
             <QuestionInput
               addQuestion={addQuestion}
               setformData={setformData}
-              
             />
-             {/* <AnswerName setformData={setformData} index={index}/> */}
+            {/* <AnswerName setformData={setformData} index={index}/> */}
             {answers?.map((cur, index) => (
               <Fragment key={index}>
-                <AnswerName setformData={setformData} index={index}/>
+                <AnswerName
+                  setformData={setformData}
+                  index={index}
+                  formData={formData}
+                  questionIndex={questionIndex}
+                />
               </Fragment>
             ))}
-            <button onClick={() => addAnswer(index)}>add</button>
+            {
+              (type === 'single-selection' || type === 'multi-selection') ? (
+
+                <button onClick={() => addAnswer(questionIndex)}>add</button>
+              ):(<></>)
+          }
+      
           </Fragment>
         );
       })}
