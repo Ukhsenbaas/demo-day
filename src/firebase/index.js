@@ -32,6 +32,7 @@ export const useCollection = (path) => {
     console.log(data);
     console.log(path);
     return addDoc(collection(db, `${path}`), {
+      // surveyName: 
       ...data,
       createdAt: serverTimestamp(),
     });

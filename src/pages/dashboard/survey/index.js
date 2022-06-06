@@ -44,6 +44,7 @@ export default function Survey() {
             <QuestionInput
               addQuestion={addQuestion}
               setformData={setformData}
+              questionIndex={questionIndex}
             />
             {/* <AnswerName setformData={setformData} index={index}/> */}
             {answers?.map((cur, index) => (
@@ -72,7 +73,7 @@ export default function Survey() {
       <div>
         <DoneSurvey
           firebasePushSurvey={firebasePushSurvey}
-          setformData={setformData}
+          formData={formData}
         />
       </div>
     </>

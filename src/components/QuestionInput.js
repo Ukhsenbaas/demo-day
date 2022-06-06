@@ -2,7 +2,7 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import _ from "lodash";
 import { useCallback } from "react";
-export const QuestionInput = ({ setformData }) => {
+export const QuestionInput = ({ setformData, questionIndex}) => {
   function handleChange(event) {
     debounceFn(event.target.value);
   }
@@ -12,7 +12,7 @@ export const QuestionInput = ({ setformData }) => {
     setformData((prev) => ({
       ...prev,
       [Object.keys(prev).length - 1]: {
-        ...prev[length],
+        ...prev[questionIndex],
         question: value,
       },
     }));
