@@ -28,11 +28,9 @@ const db = getFirestore(app);
 
 export const useCollection = (path) => {
   // add function
-  const firebasePushSurvey = (data) => {
-    console.log(data);
-    console.log(path);
+  const firebasePushSurvey = ({data, name}) => {
     return addDoc(collection(db, `${path}`), {
-      // surveyName: 
+      surveyName: name,
       ...data,
       createdAt: serverTimestamp(),
     });

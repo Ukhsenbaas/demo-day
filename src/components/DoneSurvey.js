@@ -2,13 +2,17 @@ import * as React from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 
-export const DoneSurvey = ({firebasePushSurvey, formData}) => {
+export const DoneSurvey = ({ onclick }) => {
   return (
     <Stack spacing={2} direction="row">
-      <Button onClick={()=>{
-        console.log('hi')
-        firebasePushSurvey(formData,{surveyname: "1st sudalgaa"})
-      }} variant="contained">Done Survey</Button>
+      <Button onClick={onclick} variant="contained">
+        Done Survey
+      </Button>
     </Stack>
   );
 };
+
+// () => {
+//   console.log("hi");
+//     firebasePushSurvey({data: formData, name: "jsaio"});
+// }

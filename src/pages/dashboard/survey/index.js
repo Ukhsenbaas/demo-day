@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+  import { Fragment, useState } from "react";
 import { AddSurveyBtn } from "../../../components/AddSurveyBtn";
 import { AnswerName } from "../../../components/AnswerName";
 import { QuestionInput } from "../../../components/QuestionInput";
@@ -8,8 +8,10 @@ import { useCollection } from "../../../firebase";
 
 export default function Survey() {
   const [formData, setformData] = useState({});
+  const [surveyName, setSurveyName] = useState({});
 
   const { firebasePushSurvey } = useCollection("company/starpup1/surveys");
+  const { firebasePushSurvey: sudalgaaAdd } = useCollection("question/starpup1/surveys");
   const addQuestion = (type) => {
     setformData((prev) => ({
       ...prev,
@@ -34,7 +36,10 @@ export default function Survey() {
   };
   return (
     <>
-      <SurveyNameInput />
+      <SurveyNameInput
+        onchange={(e) => setSurveyName(e.target.value)}
+        firebasePushSurvey={firebasePushSurvey}
+      />
       {Object.keys(formData).map((cur, questionIndex) => {
         const answers = formData[cur].answers;
         const type = formData[cur].type;
@@ -57,13 +62,11 @@ export default function Survey() {
                 />
               </Fragment>
             ))}
-            {
-              (type === 'single-selection' || type === 'multi-selection') ? (
-
-                <button onClick={() => addAnswer(questionIndex)}>add</button>
-              ):(<></>)
-          }
-      
+            {type === "single-selection" || type === "multi-selection" ? (
+              <button onClick={() => addAnswer(questionIndex)}>add</button>
+            ) : (
+              <></>
+            )}
           </Fragment>
         );
       })}
@@ -72,8 +75,12 @@ export default function Survey() {
       </div>
       <div>
         <DoneSurvey
-          firebasePushSurvey={firebasePushSurvey}
-          formData={formData}
+          // firebasePushSurvey={firebasePushSurvey}
+          // formData={formData}
+          onclick={() => {
+            firebasePushSurvey({ data: formData, name: surveyName });
+            sudalgaaAdd({ data: formData, name: surveyName });   
+          }}
         />
       </div>
     </>

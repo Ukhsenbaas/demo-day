@@ -1,29 +1,24 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import { useCallback } from "react";
+import * as React from "react";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 import _ from "lodash";
 
-export const SurveyNameInput = () => {
-
-  function handleChange(event) {
-    debounceFn(event.target.value);
-  }
-  const debounceFn = useCallback(_.debounce(handleDebounceFn, 1000), []);
-
-  function handleDebounceFn(value) {
-  console.log(value)
-  }
-
+export const SurveyNameInput = ({ onchange }) => {
+ 
 
   return (
     <Box
       sx={{
         width: 500,
-        maxWidth: '100%',
+        maxWidth: "100%",
       }}
     >
-      <TextField fullWidth label="Survey Name" id="surveyName" onChange={handleChange} />
+      <TextField
+        fullWidth
+        label="Survey Name"
+        id="surveyName"
+        onChange={onchange}
+      />
     </Box>
   );
-}
+};
