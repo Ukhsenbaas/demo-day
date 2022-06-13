@@ -28,7 +28,7 @@ const db = getFirestore(app);
 
 export const useCollection = (path) => {
   // add function
-  const firebasePushSurvey = ({data, name}) => {
+  const addDocument = ({data, name}) => {
     return addDoc(collection(db, `${path}`), {
       surveyName: name,
       ...data,
@@ -37,6 +37,6 @@ export const useCollection = (path) => {
   };
 
   return {
-    firebasePushSurvey,
+    addDocument,
   };
 };
